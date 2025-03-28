@@ -1,5 +1,6 @@
 package com.auth.Demo.controllers;
 
+import com.auth.Demo.entities.Role;
 import com.auth.Demo.entities.UserEntity;
 import com.auth.Demo.services.UserService;
 import org.springframework.security.core.Authentication;
@@ -43,8 +44,35 @@ public class LoginController {
             model.addAttribute("error", "Email Already Exists");
             return "register";
         }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
+        if (user.getRole() == null) {
+            user.setRole(Role.STUDENT);
+        }
+
         userService.addUser(user);
         return "login";
+    }
+
+    @GetMapping("/faculty-login")
+    public String getFacultyLogin() {
+        return "faculty-login";
+    }
+
+    @GetMapping("/student-login")
+    public String getStudentLogin() {
+        return "student-login";
+    }
+
+    @GetMapping("/student-dashboard")
+    public String getStudentDashboard() {
+        return "student-dashboard";
+    }
+
+    @GetMapping("/faculty-dashboard")
+    public String getFacultyDashboard() {
+        return "faculty-dashboard";
     }
 }

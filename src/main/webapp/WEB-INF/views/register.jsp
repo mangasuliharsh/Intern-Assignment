@@ -12,21 +12,32 @@
 <div class="container">
     <h2>Register</h2>
 
-    <% 
+    <%
         String errorMessage = (String) request.getAttribute("error");
-        if (errorMessage != null) { 
+        if (errorMessage != null) {
     %>
     <p style="color: red;"><%= errorMessage %></p>
-    <% 
-        } 
+    <%
+        }
     %>
+
     <form action="/register" method="post">
         <input type="text" name="name" placeholder="Full Name" required><br>
         <input type="email" name="email" placeholder="Email" required><br>
         <input type="password" name="password" placeholder="Password" required><br>
+
+        <select name="role" required>
+            <option value="" disabled selected>Select Role</option>
+            <option value="STUDENT">Student</option>
+            <option value="FACULTY">Faculty</option>
+        </select>
+        <br>
+
         <button type="submit">Register</button>
     </form>
-    <p>Already have an account? <a href="login">Login</a></p>
+
+    <p>Already have an account? <a href="/student-login">Student Login</a></p>
+    <p>Already have an account? <a href="/faculty-login">Faculty Login</a></p>
 </div>
 
 </body>
